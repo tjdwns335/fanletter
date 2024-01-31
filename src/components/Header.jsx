@@ -1,17 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Header() {
+function Header({ girlGroup }) {
   return (
     <HeaderStyle>
       <TitleStyle>오마이걸 팬레터</TitleStyle>
       <UlStyle>
-        <ListStyle>효정</ListStyle>
-        <ListStyle>미미</ListStyle>
-        <ListStyle>유아</ListStyle>
-        <ListStyle>승희</ListStyle>
-        <ListStyle>유빈</ListStyle>
-        <ListStyle>아린</ListStyle>
+        {
+          girlGroup.map((girl) => <ListStyle>{girl.name}</ListStyle>)
+        }
       </UlStyle>
     </HeaderStyle>
   )

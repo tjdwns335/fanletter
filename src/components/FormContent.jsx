@@ -1,35 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 
-function FormContent() {
+function FormContent({ girlGroup }) {
   const addEventHandler = (e) => {
     e.preventDefault();
   }
+  const [name, setName] = useState('');
+  const [detail, setDetail] = useState('');
   return (
     <FormStyle>
       <SectionStyle>
         <LabelStyle>닉네임 : </LabelStyle>
-        <InputStyle type="text" />
+        <InputStyle
+          type="text"
+          value={name}
+        />
       </SectionStyle>
       <SectionStyle>
         <LabelStyle>내용 : </LabelStyle>
-        <TextareaStyle maxlength="100"></TextareaStyle>
+        <TextareaStyle
+          maxlength="100"
+          value={detail}
+        ></TextareaStyle>
       </SectionStyle>
       <SectionStyle>
         <SecondLabel>누구에게 보내실 건가요?</SecondLabel>
         <select>
-          <option value="효정">효정</option>
-          <option value="미미">미미</option>
-          <option value="유아">유아</option>
-          <option value="승희">승희</option>
-          <option value="유빈">유빈</option>
-          <option value="아린">아린</option>
+          {
+            girlGroup.map((girl) => <option value={girl.name}>{girl.name}</option>)
+          }
         </select>
       </SectionStyle>
       <FormButton>
         <button onClick={addEventHandler}>팬레터 등록</button>
       </FormButton>
-    </FormStyle>
+    </FormStyle >
   )
 }
 
