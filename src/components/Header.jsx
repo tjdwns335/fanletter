@@ -28,6 +28,7 @@ const HeaderStyle = styled.header`
   align-content: center;
   justify-content: center;
   align-items: center;
+  margin-left: 50px;
 `
 const TitleStyle = styled.h1`
   font-size: 3rem;
@@ -46,6 +47,7 @@ const UlStyle = styled.ul`
   height: 80px;
   background: linear-gradient(90deg, rgba(233,228,155,1) 0%, rgba(172,212,254,1) 20%, rgba(236,171,206,1) 50%, rgba(172,212,254,1) 75%, rgba(233,228,155,1) 100%);
   padding: 0 15px;
+  margin-right: 45px;
 `
 const ListStyle = styled.li`
   width: 50px;
@@ -54,4 +56,9 @@ const ListStyle = styled.li`
   border-radius: 20px;
   text-align: center;
   line-height: 30px;
+  color: #333;
+  cursor: pointer;
+  &:hover {
+    background-color: #fff;
+  }
 `
