@@ -1,6 +1,9 @@
 import React from 'react'
 
 function FormContent() {
+  const addEventHandler = (e) => {
+    e.preventDefault();
+  }
   return (
     <form>
       <label>닉네임 : </label>
@@ -18,9 +21,10 @@ function FormContent() {
           <option value="아린">아린</option>
         </select>
       </div>
-      <button>팬레터 등록</button>
+      <button onClick={addEventHandler}>팬레터 등록</button>
     </form>
   )
 }
 
 export default FormContent
+
