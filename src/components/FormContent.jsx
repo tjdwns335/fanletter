@@ -19,7 +19,6 @@ function FormContent({ girlGroup }) {
       <SectionStyle>
         <LabelStyle>내용 : </LabelStyle>
         <TextareaStyle
-          maxlength="100"
           value={detail}
         ></TextareaStyle>
       </SectionStyle>
@@ -27,7 +26,7 @@ function FormContent({ girlGroup }) {
         <SecondLabel>누구에게 보내실 건가요?</SecondLabel>
         <select>
           {
-            girlGroup.map((girl) => <option value={girl.name}>{girl.name}</option>)
+            girlGroup.map((girl) => <option key={girl.id} value={girl.name}>{girl.name}</option>)
           }
         </select>
       </SectionStyle>

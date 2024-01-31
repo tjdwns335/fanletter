@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 function Header({ girlGroup }) {
+  const [activeId, setActiveId] = useState(null);
+
+  const clickBtn = (id) => {
+    setActiveId(id);
+  };
   return (
     <HeaderStyle>
       <TitleStyle>오마이걸 팬레터</TitleStyle>
       <UlStyle>
         {
-          girlGroup.map((girl) => <ListStyle>{girl.name}</ListStyle>)
+          girlGroup.map((girl) =>
+            <ListStyle
+              key={girl.id}
+              onClick={() => clickBtn(girl.id)}
+              backgroundColor={activeId === girl.id ? '#fff' : '#16f397'}
+            >{girl.name}</ListStyle>
+          )
         }
       </UlStyle>
     </HeaderStyle>
   )
+
 }
 
 export default Header
@@ -49,7 +61,7 @@ const UlStyle = styled.ul`
 const ListStyle = styled.li`
   width: 50px;
   height: 30px;
-  background-color: #16f397;
+  background-color: ${props => props.backgroundColor};
   border-radius: 20px;
   text-align: center;
   line-height: 30px;
