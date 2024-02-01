@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
-function FormContent({ girlGroup }) {
+function FormGroup({ girlGroup }) {
   const addEventHandler = (e) => {
     e.preventDefault();
   }
   const [name, setName] = useState('');
   const [detail, setDetail] = useState('');
+  const nameChangeHandler = (e) => {
+    setName(e.target.value);
+  }
+  const detailChangeHandler = (e) => {
+    setDetail(e.target.value);
+  }
   return (
     <FormStyle>
       <SectionStyle>
@@ -14,12 +20,14 @@ function FormContent({ girlGroup }) {
         <InputStyle
           type="text"
           value={name}
+          onChange={nameChangeHandler}
         />
       </SectionStyle>
       <SectionStyle>
         <LabelStyle>내용 : </LabelStyle>
         <TextareaStyle
           value={detail}
+          onChange={detailChangeHandler}
         ></TextareaStyle>
       </SectionStyle>
       <SectionStyle>
@@ -37,7 +45,7 @@ function FormContent({ girlGroup }) {
   )
 }
 
-export default FormContent
+export default FormGroup
 
 const FormStyle = styled.form`
   display: flex;
@@ -87,5 +95,3 @@ const FormButton = styled.div`
     }
   }
 `
-
-

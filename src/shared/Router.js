@@ -1,10 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "../pages/Home";
+import Test from "../pages/Test";
+import Detail from "../pages/Detail";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route />
+      <Routes >
+        <Route path="/" element={<Home />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </BrowserRouter>
   )
