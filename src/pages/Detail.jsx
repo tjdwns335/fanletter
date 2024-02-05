@@ -21,6 +21,7 @@ function Detail() {
       setLetters(filteredLetter);
     }
   }
+  // temp
   const changeDetail = () => {
     if (!changeText) {
       return alert("수정사항이 없습니다!");
