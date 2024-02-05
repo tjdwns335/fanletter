@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMember } from '../redux/modules/member';
+import { setMember } from 'redux/modules/member';
 
 function Header() {
   const activeMember = useSelector((state) => state.member);
@@ -9,7 +9,6 @@ function Header() {
   const onActiveMember = (e) => {
     if (e.target === e.currentTarget) return;
     dispatch(setMember(e.target.textContent));
-    // setActiveMember(e.target.textContent);
   }
   return (
     <HeaderStyle>
@@ -44,7 +43,7 @@ const TitleStyle = styled.h1`
   font-weight: 900;
   background: linear-gradient(90deg, rgba(233,228,155,1) 0%, rgba(172,212,254,1) 20%, rgba(236,171,206,1) 50%, rgba(172,212,254,1) 75%, rgba(233,228,155,1) 100%);
   color: transparent;
-    -webkit-background-clip: text;
+  background-clip: text;
   margin-bottom: 50px;
 `;
 const UlStyle = styled.ul`
