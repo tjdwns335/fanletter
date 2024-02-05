@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getLocationDate } from 'utill/date';
+import { LetterContext } from 'context/LetterContext';
 
-function Detail({ letters, setLetters }) {
+function Detail() {
+  const { letters, setLetters } = useContext(LetterContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const [changeBtn, setChangeBtn] = useState(false);

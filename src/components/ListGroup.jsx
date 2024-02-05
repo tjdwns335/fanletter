@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import defaultUser from "assets/defaultuser.jpg";
 import { getLocationDate } from 'utill/date';
 import { useNavigate } from 'react-router-dom';
+import { LetterContext } from "context/LetterContext";
+import { MemberContext } from "context/MemberContext";
 
-function ListGroup({ activeMember, letters }) {
+function ListGroup() {
+  const { letters } = useContext(LetterContext);
+  const { activeMember } = useContext(MemberContext);
   const filterFakeData = letters.filter(item => item.writedTo === activeMember);
   const navigate = useNavigate();
   return (

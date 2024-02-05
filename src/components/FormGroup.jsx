@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
+import { LetterContext } from "context/LetterContext"
 
-function FormGroup({ setLetters }) {
+function FormGroup() {
+  const { setLetters } = useContext(LetterContext);
   const [nickname, setNickname] = useState('');
   const [detail, setDetail] = useState('');
   const [member, setMember] = useState("효정");

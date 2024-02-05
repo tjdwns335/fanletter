@@ -1,7 +1,9 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import { MemberContext } from "context/MemberContext";
+import React, { useContext } from 'react';
+import styled, { css } from 'styled-components';
 
-function Header({ activeMember, setActiveMember }) {
+function Header() {
+  const { activeMember, setActiveMember } = useContext(MemberContext);
   const onActiveMember = (e) => {
     if (e.target === e.currentTarget) return;
     setActiveMember(e.target.textContent);
