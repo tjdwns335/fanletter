@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 function Header({ activeMember, setActiveMember }) {
