@@ -1,12 +1,15 @@
-import { MemberContext } from "context/MemberContext";
-import React, { useContext } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMember } from '../redux/modules/member';
 
 function Header() {
-  const { activeMember, setActiveMember } = useContext(MemberContext);
+  const activeMember = useSelector((state) => state.member);
+  const dispatch = useDispatch();
   const onActiveMember = (e) => {
     if (e.target === e.currentTarget) return;
-    setActiveMember(e.target.textContent);
+    dispatch(setMember(e.target.textContent));
+    // setActiveMember(e.target.textContent);
   }
   return (
     <HeaderStyle>

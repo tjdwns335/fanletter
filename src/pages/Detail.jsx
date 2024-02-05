@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import defaultUser from "assets/defaultuser.jpg";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getLocationDate } from 'utill/date';
-import { LetterContext } from 'context/LetterContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLetter, deleteLetter } from '../redux/modules/letters';
 
 function Detail() {
-  const { letters, setLetters } = useContext(LetterContext);
+  const letters = useSelector((state) => state.letters);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [changeBtn, setChangeBtn] = useState(false);
@@ -16,9 +18,8 @@ function Detail() {
   const deleteButton = () => {
     const deleteAnswer = window.confirm('삭제하시겠습니까?');
     if (deleteAnswer) {
-      const filteredLetter = letters.filter((item) => item.id !== id);
       navigate("/")
-      setLetters(filteredLetter);
+      dispatch(deleteLetter(id));
     }
   }
 
@@ -28,13 +29,8 @@ function Detail() {
     }
     const changeAnswer = window.confirm('수정하시겠습니까?');
     if (changeAnswer) {
-      const newText = letters.map((item) => {
-        if (item.id === id) {
-          return { ...item, content: changeText }
-        }
-        return letters;
-      })
-      setLetters(newText);
+
+      dispatch(changeLetter({ id, changeText }));
       setChangeBtn(false);
       setChangeText('');
     }

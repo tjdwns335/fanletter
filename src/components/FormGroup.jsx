@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
-import { LetterContext } from "context/LetterContext"
+import { useDispatch } from 'react-redux';
+import { addLetter } from '../redux/modules/letters';
 
 function FormGroup() {
-  const { setLetters } = useContext(LetterContext);
+  const dispatch = useDispatch();
+
   const [nickname, setNickname] = useState('');
   const [detail, setDetail] = useState('');
   const [member, setMember] = useState("효정");
@@ -29,7 +31,7 @@ function FormGroup() {
       writedTo: member,
       id: uuid(),
     }
-    setLetters((prev) => [newLetters, ...prev]);
+    dispatch(addLetter(newLetters));
     setNickname("");
     setDetail("");
   }
