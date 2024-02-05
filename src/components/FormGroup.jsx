@@ -81,6 +81,7 @@ const FormStyle = styled.form`
   padding: 15px;
   width: 40%;
   background-color: #e2e2e2;
+  margin-bottom: 30px;
 `
 
 const SectionStyle = styled.section`
