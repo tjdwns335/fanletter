@@ -1,7 +1,5 @@
-import './reset.css';
 import React from 'react';
-import Router from './shared/Router';
-import { v4 as UUID } from 'uuid';
+import Router from 'shared/Router';
 import styled from 'styled-components';
 
 function App() {
