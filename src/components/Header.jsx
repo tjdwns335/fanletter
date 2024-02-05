@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components'
 
-function Header() {
-  const [activeMember, setActiveMember] = useState("효정");
+function Header({ activeMember, setActiveMember }) {
   const onActiveMember = (e) => {
     if (e.target === e.currentTarget) return;
     setActiveMember(e.target.textContent);

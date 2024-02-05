@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
-function FormGroup({ girlGroup }) {
+function FormGroup() {
   const addEventHandler = (e) => {
     e.preventDefault();
   }
