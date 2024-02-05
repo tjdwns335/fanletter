@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import defaultUser from "assets/defaultuser.jpg";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getLocationDate } from 'utill/date';
 
@@ -46,7 +47,7 @@ function Detail({ letters, setLetters }) {
         <UserInfoStyle>
           <NickNameStyle>
             <AvatarStyle>
-              <img src={avatar} alt="아바타 이미지" />
+              <img src={avatar || defaultUser} alt="아바타 이미지" />
             </AvatarStyle>
             <span>{nickname}</span>
           </NickNameStyle>
