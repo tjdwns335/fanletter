@@ -25,7 +25,7 @@ function FormGroup({ setLetters }) {
       avatar: null,
       content: detail,
       writedTo: member,
-      id: uuid,
+      id: uuid(),
     }
     setLetters((prev) => [newLetters, ...prev]);
     setNickname("");
