@@ -4,7 +4,7 @@ import defaultUser from "assets/defaultuser.jpg";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getLocationDate } from 'utill/date';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeLetter, deleteLetter } from '../redux/modules/letters';
+import { changeLetter, deleteLetter } from 'testRedux/modules/letters';
 
 function Detail() {
   const letters = useSelector((state) => state.letters);

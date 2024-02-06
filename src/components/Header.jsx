@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMember } from '../redux/modules/member';
+import { setMember } from 'testRedux/modules/member';
 
 function Header() {
   const activeMember = useSelector((state) => state.member);

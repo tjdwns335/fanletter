@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux"
-import letters from "../modules/letters";
-import member from "../modules/member";
+import letters from "testRedux/modules/letters";
+import member from "testRedux/modules/member";
 
 const rootReducer = combineReducers({
   letters,
