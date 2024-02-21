@@ -1,3 +1,4 @@
+import { authApi } from 'api';
 import useForm from 'hooks/useForm';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
@@ -14,15 +15,37 @@ function Login() {
   const { id, password, nickname } = formState;
 
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (loginMode) {
-      dispatch(login());
-      toast.success("로그인 성공");
+      try {
+        const { data } = await authApi.post("/login", {
+          id, password
+        });
+        if (data.success) {
+          dispatch(login(data.accessToken));
+          toast.success("로그인 성공");
+        }
+
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+
     } else {
-      setLoginMode(true);
-      resetForm();
-      toast.success("회원가입 성공");
+      try {
+        const { data } = await authApi.post("/register", {
+          id, password, nickname
+        });
+        if (data.success) {
+          setLoginMode(true);
+          resetForm();
+          toast.success(data.message);
+        }
+
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+
     }
   }
 
