@@ -6,7 +6,7 @@ import Profile from "pages/Profile";
 import Login from "pages/Login";
 
 const Router = () => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   return (
     <BrowserRouter>
       <Routes >
