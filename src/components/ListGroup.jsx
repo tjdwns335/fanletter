@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import defaultUser from "assets/defaultuser.jpg";
 import { getLocationDate } from 'utill/date';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getLetters } from 'testRedux/modules/lettersSlice';
 
 function ListGroup() {
-  const letters = useSelector((state) => state.letters);
+  const dispatch = useDispatch()
+  const { letters } = useSelector((state) => state.letters);
   const activeMember = useSelector((state) => state.member);
   const filterFakeData = letters.filter(item => item.writedTo === activeMember);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(__getLetters());
+  }, [dispatch]);
   return (
     <ListWrap>
       {

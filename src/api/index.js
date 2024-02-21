@@ -6,4 +6,11 @@ export const authApi = axios.create({
   headers: {
     "Content-Type": "application/json"
   }
-})
+});
+
+export const jsonApi = axios.create({
+  baseURL: "http://localhost:5000",
+  headers: {
+    "Content-Type": "application/json"
+  }
+});

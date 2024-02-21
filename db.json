@@ -1,3 +1,13 @@
 {
-	"letters": []
+  "letters": [
+    {
+      "id": "9b199ea9-6b6d-43da-b4a8-a0f71e72d48c",
+      "createdAt": 1708511879835,
+      "nickname": "test1234",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/f2a15715-dac3-4128-9522-b4be1ac7fd2a.jpg",
+      "content": "asdadas",
+      "writedTo": "효정",
+      "userId": "test11"
+    }
+  ]
 }

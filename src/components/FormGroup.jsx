@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLetter } from 'testRedux/modules/lettersSlice';
+import { __addLetter } from 'testRedux/modules/lettersSlice';
 
 function FormGroup() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function FormGroup() {
       id: uuid(),
       userId,
     }
-    dispatch(addLetter(newLetters));
+    dispatch(__addLetter(newLetters));
     setDetail("");
   }
 
