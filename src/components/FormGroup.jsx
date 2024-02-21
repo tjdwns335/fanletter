@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 import { useDispatch } from 'react-redux';
-import { addLetter } from 'testRedux/modules/letters';
+import { addLetter } from 'testRedux/modules/lettersSlice';
 
 function FormGroup() {
   const dispatch = useDispatch();
