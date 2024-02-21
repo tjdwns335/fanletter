@@ -1,3 +1,4 @@
+import useForm from 'hooks/useForm';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -7,15 +8,11 @@ import { login } from 'testRedux/modules/authSlice';
 function Login() {
   const dispatch = useDispatch();
   const [loginMode, setLoginMode] = useState(true);
-  const initialState = {
-    id: "", password: "", nickname: ""
-  }
-  const [formState, setFormState] = useState(initialState);
+  const { formState, onChangeHandler, resetForm } = useForm({
+    id: "", password: "", nickname: "",
+  });
   const { id, password, nickname } = formState;
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
+
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -24,7 +21,7 @@ function Login() {
       toast.success("로그인 성공");
     } else {
       setLoginMode(true);
-      setFormState(initialState);
+      resetForm();
       toast.success("회원가입 성공");
     }
   }
