@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "pages/Home";
 import Detail from "pages/Detail";
-import { useState } from "react";
 import Profile from "pages/Profile";
 import Login from "pages/Login";
+import { useSelector } from "react-redux";
 
 const Router = () => {
-  const [login, setLogin] = useState(true);
+  const login = useSelector(state => state.auth.isLogin);
   return (
     <BrowserRouter>
       <Routes >
