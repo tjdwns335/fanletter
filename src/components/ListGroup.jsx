@@ -17,7 +17,7 @@ function ListGroup() {
           filterFakeData.map((item) => {
             return (
               <LetterWrap key={item.id} onClick={() => navigate(`/detail/${item.id}`)}>
-                <UserInfo>
+                <UserInfoStyle>
                   <AvatarStyle>
                     <img src={item.avatar ?? defaultUser} alt="아바타 이미지" />
                   </AvatarStyle>
@@ -25,7 +25,7 @@ function ListGroup() {
                     <p>{item.nickname}</p>
                     <time>{getLocationDate(item.createdAt)}</time>
                   </NickNameStyle>
-                </UserInfo>
+                </UserInfoStyle>
                 <ContentStyle>
                   {item.content}
                 </ContentStyle>
@@ -64,7 +64,7 @@ const LetterWrap = styled.li`
     transform: scale(1.03);
   }
 `
-const UserInfo = styled.div`
+const UserInfoStyle = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
