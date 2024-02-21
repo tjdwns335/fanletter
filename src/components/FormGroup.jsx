@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'testRedux/modules/lettersSlice';
 
 function FormGroup() {
   const dispatch = useDispatch();
+  const { nickname, avatar, userId } = useSelector((state) => state.auth);
 
-  const [nickname, setNickname] = useState('');
   const [detail, setDetail] = useState('');
   const [member, setMember] = useState("효정");
 
-  const nickNameChangeHandler = (e) => {
-    setNickname(e.target.value);
-  }
+
   const detailChangeHandler = (e) => {
     setDetail(e.target.value);
   }
@@ -26,13 +24,13 @@ function FormGroup() {
     const newLetters = {
       createdAt: Date.now(),
       nickname,
-      avatar: null,
+      avatar: avatar,
       content: detail,
       writedTo: member,
       id: uuid(),
+      userId,
     }
     dispatch(addLetter(newLetters));
-    setNickname("");
     setDetail("");
   }
 
@@ -40,13 +38,7 @@ function FormGroup() {
     <FormStyle>
       <SectionStyle>
         <LabelStyle>닉네임 : </LabelStyle>
-        <InputStyle
-          type="text"
-          placeholder='최대 20글자까지 작성할 수 있습니다. '
-          maxLength={20}
-          value={nickname}
-          onChange={nickNameChangeHandler}
-        />
+        <p>{nickname}</p>
       </SectionStyle>
       <SectionStyle>
         <LabelStyle>내용 : </LabelStyle>
@@ -91,6 +83,9 @@ const SectionStyle = styled.section`
   height: 100%;
   display: flex;
   align-items: center;
+  &  label+p{
+    color: #333;
+  }
 `
 const LabelStyle = styled.label`
   display: inline-block;
