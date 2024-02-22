@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authApi } from 'api';
+import { authApi, jsonApi } from 'api';
 import defaultUser from "assets/defaultuser.jpg"
 import { toast } from 'react-toastify';
 
@@ -12,6 +12,28 @@ const initialState = {
   isError: false,
   error: null,
 }
+
+export const __changeProfile = createAsyncThunk(
+  "changeProfile",
+  async (formData, thunkAPI) => {
+    try {
+      const { data } = await authApi.patch("/profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
+      const { nickname, avatar } = data;
+      const userId = localStorage.getItem("userId");
+      const { data: myLetter } = await jsonApi.get(`/letters?userId=${userId}`);
+      for (let letter of myLetter) {
+        await jsonApi.patch(`/letters/${letter.id}`, { nickname, avatar });
+      }
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
 
 export const __login = createAsyncThunk(
   "login",
@@ -68,6 +90,29 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(__login.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    });
+    builder.addCase(__changeProfile.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(__changeProfile.fulfilled, (state, action) => {
+      const { avatar, nickname } = action.payload;
+      localStorage.setItem("avatar", avatar);
+      localStorage.setItem("nickname", nickname);
+      if (avatar) {
+        localStorage.setItem("avatar", avatar);
+        state.avatar = avatar
+      }
+      if (nickname) {
+        localStorage.setItem("nickname", nickname);
+        state.nickname = nickname;
+      }
+      state.isLoading = false;
+      toast.success("프로필 변경 완료");
+    });
+    builder.addCase(__changeProfile.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;

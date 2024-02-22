@@ -71,6 +71,60 @@
       "content": "tests",
       "writedTo": "아린",
       "userId": "test11"
+    },
+    {
+      "id": "393c3870-d2b9-438e-a145-e2a574f055d0",
+      "createdAt": 1708600670550,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "test",
+      "writedTo": "효정",
+      "userId": "test66"
+    },
+    {
+      "id": "26de5df6-5a18-44c2-8b00-709a6f28e017",
+      "createdAt": 1708600674598,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "test",
+      "writedTo": "미미",
+      "userId": "test66"
+    },
+    {
+      "id": "74a86eb5-0461-4c55-be8a-8e3af9675fd6",
+      "createdAt": 1708600680341,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "tsetsetse",
+      "writedTo": "유아",
+      "userId": "test66"
+    },
+    {
+      "id": "b845a25f-a7b9-42da-aa51-94a914308857",
+      "createdAt": 1708600686518,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "wowo",
+      "writedTo": "승희",
+      "userId": "test66"
+    },
+    {
+      "id": "07edb22b-cd85-4208-bb1d-634c1281316a",
+      "createdAt": 1708600693086,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "tests",
+      "writedTo": "유빈",
+      "userId": "test66"
+    },
+    {
+      "id": "3eefe59a-e6ad-4989-b45e-db68e85dd6a4",
+      "createdAt": 1708600699894,
+      "nickname": "test66",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/e2b869dd-c4a6-4393-b0b1-d869f1828f29.jpg",
+      "content": "stese",
+      "writedTo": "아린",
+      "userId": "test66"
     }
   ]
 }
