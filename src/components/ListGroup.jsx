@@ -7,15 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getLetters } from 'testRedux/modules/lettersSlice';
 
 function ListGroup() {
-  const dispatch = useDispatch()
   const { letters } = useSelector((state) => state.letters);
   const activeMember = useSelector((state) => state.member);
   const filterFakeData = letters.filter(item => item.writedTo === activeMember);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(__getLetters());
   }, [dispatch]);
+
   return (
     <ListWrap>
       {

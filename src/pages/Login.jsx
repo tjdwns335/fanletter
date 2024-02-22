@@ -18,7 +18,7 @@ function Login() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (loginMode) {
-      dispatch(__login(id, password));
+      dispatch(__login({ id, password }));
     } else {
       try {
         const { data } = await authApi.post("/register", {

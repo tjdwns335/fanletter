@@ -1,40 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import defaultUser from "assets/defaultuser.jpg";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getLocationDate } from 'utill/date';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeLetter, deleteLetter } from 'testRedux/modules/lettersSlice';
+import { __changeLetter, __deleteLetter, __getLetters } from 'testRedux/modules/lettersSlice';
 
 function Detail() {
-  const letters = useSelector((state) => state.letters);
+  const { letters } = useSelector((state) => state.letters);
+  const myId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [changeBtn, setChangeBtn] = useState(false);
   const [changeText, setChangeText] = useState('');
-  const { createdAt, nickname, avatar, content, writedTo } = letters.find(item => item.id === id);
+
+  useEffect(() => {
+    dispatch(__getLetters());
+  }, [dispatch]);
 
   const deleteButton = () => {
     const deleteAnswer = window.confirm('삭제하시겠습니까?');
     if (deleteAnswer) {
       navigate("/")
-      dispatch(deleteLetter(id));
+      dispatch(__deleteLetter(id));
     }
-  }
+  };
 
   const changeDetail = () => {
     if (!changeText) {
       return alert("수정사항이 없습니다!");
-    }
+    };
     const changeAnswer = window.confirm('수정하시겠습니까?');
     if (changeAnswer) {
-
-      dispatch(changeLetter({ id, changeText }));
+      dispatch(__changeLetter({ id, changeText }));
       setChangeBtn(false);
       setChangeText('');
-    }
-  }
+    };
+  };
+  const { createdAt, nickname, avatar, content, writedTo, userId } = letters.find(item => item.id === id);
+  const mineId = myId === userId;
   return (
     <Wrap>
       <HomeBtnStyle>
@@ -67,10 +72,13 @@ function Detail() {
             </> :
             <>
               <ContentStyle>{content}</ContentStyle>
-              <BtnGroup>
-                <button onClick={() => setChangeBtn(true)}>수정</button>
-                <button onClick={deleteButton}>삭제</button>
-              </BtnGroup>
+              {mineId && (
+                <BtnGroup>
+                  <button onClick={() => setChangeBtn(true)}>수정</button>
+                  <button onClick={deleteButton}>삭제</button>
+                </BtnGroup>
+              )}
+
             </>
         }
       </DetailContent>

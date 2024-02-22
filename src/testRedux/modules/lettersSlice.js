@@ -9,9 +9,35 @@ const initialState = {
 };
 
 const getLetterFromDB = async () => {
-  const { data } = await jsonApi.get("/letter?_sort=-createdAt");
+  const { data } = await jsonApi.get("/letters?_sort=-createdAt");
   return data;
 }
+
+export const __changeLetter = createAsyncThunk(
+  "changeLetter",
+  async ({ id, changeText }, thunkAPI) => {
+    try {
+      await jsonApi.patch(`/letters/${id}`, { content: changeText });
+      const letters = await getLetterFromDB();
+      return letters;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
+
+export const __deleteLetter = createAsyncThunk(
+  "deleteLetter",
+  async (id, thunkAPI) => {
+    try {
+      await jsonApi.delete(`/letters/${id}`);
+      const letters = await getLetterFromDB();
+      return letters;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
 
 export const __getLetters = createAsyncThunk(
   "getLetters",
@@ -86,6 +112,34 @@ const lettersSlice = createSlice({
       state.letters = action.payload;
     });
     builder.addCase(__getLetters.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    });
+    builder.addCase(__deleteLetter.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(__deleteLetter.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.letters = action.payload;
+    });
+    builder.addCase(__deleteLetter.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    });
+    builder.addCase(__changeLetter.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(__changeLetter.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.letters = action.payload;
+    });
+    builder.addCase(__changeLetter.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;

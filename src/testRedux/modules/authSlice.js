@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from 'api';
 import defaultUser from "assets/defaultuser.jpg"
 import { toast } from 'react-toastify';
-import { __addLetter } from './lettersSlice';
 
 const initialState = {
   isLogin: !!localStorage.getItem("accessToken"),
@@ -27,7 +26,6 @@ export const __login = createAsyncThunk(
         return { accessToken, avatar, nickname, userId };
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
       thunkAPI.rejectWithValue(error);
     }
@@ -54,10 +52,10 @@ const authSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(__addLetter.pending, (state) => {
+    builder.addCase(__login.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(__addLetter.fulfilled, (state, action) => {
+    builder.addCase(__login.fulfilled, (state, action) => {
       const { accessToken, avatar, nickname, userId } = action.payload;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("avatar", avatar);
@@ -69,7 +67,7 @@ const authSlice = createSlice({
       state.userId = userId;
       state.isLoading = false;
     });
-    builder.addCase(__addLetter.rejected, (state, action) => {
+    builder.addCase(__login.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;
