@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled, { css } from 'styled-components'
-import { login } from 'testRedux/modules/authSlice';
+import { __login } from 'testRedux/modules/authSlice';
 
 function Login() {
   const dispatch = useDispatch();
@@ -18,20 +18,7 @@ function Login() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (loginMode) {
-      try {
-        const { data } = await authApi.post("/login", {
-          id, password
-        });
-        const { accessToken, avatar, nickname, userId } = data;
-        if (data.success) {
-          dispatch(login({ accessToken, avatar, nickname, userId }));
-          toast.success("로그인 성공");
-        }
-
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-
+      dispatch(__login(id, password));
     } else {
       try {
         const { data } = await authApi.post("/register", {

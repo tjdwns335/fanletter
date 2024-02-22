@@ -10,7 +10,7 @@ const initialState = {
 
 const getLetterFromDB = async () => {
   const { data } = await jsonApi.get("/letter?_sort=-createdAt");
-  return thunkAPI.fulfillWithValue(data);
+  return data;
 }
 
 export const __getLetters = createAsyncThunk(
@@ -20,7 +20,7 @@ export const __getLetters = createAsyncThunk(
       const letters = await getLetterFromDB();
       return letters;
     } catch (error) {
-      thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 )

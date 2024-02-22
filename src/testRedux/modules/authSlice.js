@@ -1,12 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { authApi } from 'api';
 import defaultUser from "assets/defaultuser.jpg"
+import { toast } from 'react-toastify';
+import { __addLetter } from './lettersSlice';
 
 const initialState = {
   isLogin: !!localStorage.getItem("accessToken"),
   avatar: localStorage.getItem("avatar"),
   nickname: localStorage.getItem("nickname"),
   userId: localStorage.getItem("userId"),
+  isLoading: false,
+  isError: false,
+  error: null,
 }
+
+export const __login = createAsyncThunk(
+  "login",
+  async ({ id, password }, thunkAPI) => {
+    try {
+      const { data } = await authApi.post("/login?expiresIn=10m", {
+        id, password
+      });
+      const { accessToken, avatar, nickname, userId } = data;
+      if (data.success) {
+        toast.success("로그인 성공");
+        return { accessToken, avatar, nickname, userId };
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+      thunkAPI.rejectWithValue(error);
+    }
+  })
 
 const authSlice = createSlice({
   name: "auth",
@@ -27,6 +52,28 @@ const authSlice = createSlice({
       state.isLogin = false;
       localStorage.clear();
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(__addLetter.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(__addLetter.fulfilled, (state, action) => {
+      const { accessToken, avatar, nickname, userId } = action.payload;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("avatar", avatar);
+      localStorage.setItem("nickname", nickname);
+      localStorage.setItem("userId", userId);
+      state.isLogin = true;
+      state.avatar = avatar || defaultUser;
+      state.nickname = nickname;
+      state.userId = userId;
+      state.isLoading = false;
+    });
+    builder.addCase(__addLetter.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    });
   }
 })
 
